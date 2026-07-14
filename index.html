@@ -3399,7 +3399,7 @@
           </div>
         </div>
       </div>
-      <div class="media-dots" id="testDots"></div>
+      <div class="media-counter" id="testCounter">1 / 3</div>
     </section>
 
     <section class="legacy-band">
@@ -3501,7 +3501,7 @@
       ${items.length > 1 ? `
         <button class="media-arrow prev" data-dir="1" aria-label="السابق">›</button>
         <button class="media-arrow next" data-dir="-1" aria-label="التالي">‹</button>
-        <div class="media-dots">${items.map((_, i) => `<button data-idx="${i}" class="${i === 0 ? 'active' : ''}"></button>`).join('')}</div>
+
         <div class="media-counter">1 / ${items.length}</div>
       ` : ''}
     </div>`;
@@ -3599,21 +3599,17 @@
       index = ((index % n) + n) % n;
       root.dataset.index = index;
       track.style.transform = `translateX(${index * 100}%)`;
-      const dotsWrap = document.getElementById('testDots');
-      [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
+      const counter = document.getElementById('testCounter');
+      if (counter) counter.textContent = `${index + 1} / ${n}`;
     }
-    (function initTestDots() {
+    (function initTestCounter() {
       const track = document.getElementById('testTrack');
-      const dotsWrap = document.getElementById('testDots');
-      const n = track.children.length;
-      if (n > 1) {
-        dotsWrap.innerHTML = Array.from({ length: n }, (_, i) => `<button data-idx="${i}" class="${i === 0 ? 'active' : ''}"></button>`).join('');
+      const counter = document.getElementById('testCounter');
+      const n = track ? track.children.length : 0;
+      if (counter && n > 0) {
+        counter.textContent = `1 / ${n}`;
       }
     })();
-    document.getElementById('testDots').addEventListener('click', (e) => {
-      const dot = e.target.closest('button');
-      if (dot) setTestIndex(document.getElementById('testCarousel'), parseInt(dot.dataset.idx, 10));
-    });
 
     /* ---- Lightbox with prev/next navigation ---- */
     const lightbox = document.getElementById('lightbox');
