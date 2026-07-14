@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -3023,14 +3023,14 @@
             <div class="nav-dropdown__panel">
               <div class="nav-dropdown__panel-inner">
                 <div class="nav-dropdown__sublist" aria-label="أقسام تغطية النياحة والجنازة">
-                  <a href="#janaza-g4">صور قداس الجنازة الصبح</a>
                   <a href="#janaza-g2">صلاة العشية والتسبحة ونظرة الوداع</a>
+                  <a href="#janaza-g4">صور قداس الجنازة الصبح</a>
                   <a href="#janaza-g1">صلاة الثالث</a>
                 </div>
               </div>
             </div>
           </div>
-          <a href="#janaza-g3">صور أرشيفية قديمة</a>
+          <a href="#الصور-الأرشيفية">صور أرشيفية قديمة</a>
           <a href="#مناسبات">مقتطفات من مناسبات كنسية</a>
           <a href="#أصوات">كلمات تلامس القلب</a>
 
@@ -3295,7 +3295,7 @@
 
         <div class="group" id="janaza-g2" data-title="صلاة العشية والتسبحة ونظرة الوداع">
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/1.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/55.jpg"></div>
           <div class="media-item" data-type="image"
             data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/2.jpg"></div>
           <div class="media-item" data-type="image"
@@ -4271,9 +4271,11 @@
     <div class="developer-credit">
       <span class="developer-credit__text">تم تصميم وتطوير الموقع بمحبة بواسطة</span>
       <div class="developer-credit__names">
-        <a href="https://minamaherwanis.github.io/Portfolio/" target="_blank" rel="noopener noreferrer" class="developer-credit__name">Mina</a>
+        <a href="https://minamaherwanis.github.io/Portfolio/" target="_blank" rel="noopener noreferrer"
+          class="developer-credit__name dev-mina">Mina</a>
         <span class="developer-credit__sep">&amp;</span>
-        <a href="https://abanobnabeh.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="developer-credit__name">Abanob</a>
+        <a href="https://abanobnabeh.github.io/portfolio/" target="_blank" rel="noopener noreferrer"
+          class="developer-credit__name dev-abanob">Abanob</a>
       </div>
     </div>
 
@@ -4281,39 +4283,55 @@
       .developer-credit {
         margin-top: 10px;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        gap: 4px;
+        gap: 3px;
         font-family: var(--sans);
-        opacity: 0.35;
-        transition: opacity 0.3s;
       }
-      .developer-credit:hover {
-        opacity: 0.8;
+
+      .developer-credit__names {
+        display: flex;
+        align-items: center;
+        gap: 5px;
       }
+
       .developer-credit__text {
         font-size: 0.6rem;
-        color: #fff;
+        color: rgba(255, 255, 255, 0.35);
       }
+
       .developer-credit__names {
         display: flex;
         align-items: center;
         gap: 4px;
       }
+
       .developer-credit__name {
         font-size: 0.65rem;
-        color: #fff;
         text-decoration: none;
         transition: color 0.3s;
+        font-weight: 600;
       }
-      .developer-credit__name:hover {
-        color: var(--gold-bright);
+
+      .dev-mina {
+        color: #d4af37;
       }
+
+      .dev-mina:hover {
+        color: #fff;
+      }
+
+      .dev-abanob {
+        color: #d4af37;
+      }
+
+      .dev-abanob:hover {
+        color: #fff;
+      }
+
       .developer-credit__sep {
         font-size: 0.6rem;
-        color: #fff;
+        color: rgba(255, 255, 255, 0.25);
       }
     </style>
   </footer>
