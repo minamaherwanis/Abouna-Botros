@@ -2762,6 +2762,7 @@
 
     .audio-player__progress::-webkit-slider-thumb {
       appearance: none;
+      margin-top: -5px;
       width: 18px;
       height: 18px;
       border-radius: 50%;
@@ -2784,13 +2785,13 @@
     .audio-player__progress::-webkit-slider-runnable-track {
       height: 8px;
       border-radius: 6px;
-      background: linear-gradient(90deg, var(--gold) var(--fill, 0%), rgba(35, 26, 18, 0.12) var(--fill, 0%));
+      background: linear-gradient(-90deg, var(--gold) var(--fill, 0%), rgba(35, 26, 18, 0.12) var(--fill, 0%));
     }
 
     .audio-player__progress::-moz-range-progress {
       height: 8px;
       border-radius: 6px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+      background: linear-gradient(-90deg, var(--gold), var(--gold-bright));
     }
 
     .audio-player__controls {
@@ -4137,15 +4138,15 @@
       <div class="audio-player" id="main-audio-player">
         <div class="audio-player__art">
           <div class="audio-player__art-glow"></div>
-          <img src="assets/images/placeholder.svg" alt="غلاف التسجيل" loading="lazy" width="200" height="200">
+          <img src="assets/images/audio-cover.jpg" alt="غلاف التسجيل" loading="lazy" width="200" height="200">
         </div>
         <div class="audio-player__body">
           <div class="audio-player__title-row">
-            <h3 class="audio-player__title" id="player-title">عظة الأحد — المحبة التي لا تفشل</h3>
+            <h3 class="audio-player__title" id="player-title">ترانيم لأبينا المتنيح القمص بطرس</h3>
             <span class="audio-player__eq" id="player-eq"
               aria-hidden="true"><span></span><span></span><span></span><span></span></span>
           </div>
-          <p class="audio-player__meta" id="player-meta">٢٠٢٤ · ٤٥ دقيقة</p>
+          <p class="audio-player__meta" id="player-meta">تسجيل صوتي</p>
           <div class="audio-player__progress-wrap">
             <span class="audio-player__time" id="player-current">0:00</span>
             <input type="range" class="audio-player__progress" id="player-progress" value="0" min="0" max="100"
@@ -4153,53 +4154,96 @@
             <span class="audio-player__time" id="player-duration">0:00</span>
           </div>
           <div class="audio-player__controls">
-            <button class="audio-player__btn" id="player-prev" aria-label="التسجيل السابق">⏮</button>
-            <button class="audio-player__btn audio-player__btn--play" id="player-play" aria-label="تشغيل">▶</button>
-            <button class="audio-player__btn" id="player-next" aria-label="التسجيل التالي">⏭</button>
-            <button class="audio-player__btn" id="player-download" aria-label="تحميل">⬇</button>
-            <button class="audio-player__btn" id="player-share" aria-label="مشاركة">↗</button>
+            <button class="audio-player__btn" id="player-prev" aria-label="التسجيل السابق"
+              style="color: var(--gold, #d4af37); display: inline-flex; align-items: center; justify-content: center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+              </svg>
+            </button>
+            <button class="audio-player__btn audio-player__btn--play" id="player-play" aria-label="تشغيل"
+              style="color: var(--gold, #d4af37); display: inline-flex; align-items: center; justify-content: center; transform: scale(1.2);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="transform: scaleX(-1);">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+            <button class="audio-player__btn" id="player-next" aria-label="التسجيل التالي"
+              style="color: var(--gold, #d4af37); display: inline-flex; align-items: center; justify-content: center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+              </svg>
+            </button>
+            <button class="audio-player__btn" id="player-download" aria-label="تحميل"
+              style="color: var(--gold, #d4af37); display: inline-flex; align-items: center; justify-content: center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+              </svg>
+            </button>
+            <button class="audio-player__btn" id="player-share" aria-label="مشاركة"
+              style="color: var(--gold, #d4af37); display: inline-flex; align-items: center; justify-content: center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+              </svg>
+            </button>
           </div>
         </div>
         <audio id="sermon-audio" preload="none">
-          <source src="assets/audio/sermon-01.mp3" type="audio/mpeg">
+          <source src="assets/audio/ترانيم لأبينا المتنيح القمص بطرس.mp3" type="audio/mpeg">
         </audio>
       </div>
 
-      <!-- علشان تضيف تسجيل صوتي جديد، انسخ عنصر <li> واحد وغيّر data-src والعنوان -->
       <ul class="audio-playlist" id="audio-playlist">
-        <li class="audio-playlist__item active" data-src="assets/audio/sermon-01.mp3"
-          data-title="عظة الأحد — المحبة التي لا تفشل" data-meta="٢٠٢٤ · ٤٥ دقيقة">
+        <li class="audio-playlist__item active" data-src="assets/audio/ترانيم لأبينا المتنيح القمص بطرس.mp3"
+          data-title="ترانيم لأبينا المتنيح القمص بطرس" data-meta="تسجيل صوتي">
           <span class="audio-playlist__num">01</span>
           <div class="audio-playlist__info">
-            <strong>عظة الأحد — المحبة التي لا تفشل</strong>
-            <span>٢٠٢٤ · ٤٥ دقيقة</span>
+            <strong>ترانيم لأبينا المتنيح القمص بطرس</strong>
+            <span>تسجيل صوتي</span>
           </div>
           <span class="audio-playlist__icon" aria-hidden="true">♪</span>
         </li>
-        <li class="audio-playlist__item" data-src="assets/audio/sermon-02.mp3" data-title="رسالة عيد القيامة"
-          data-meta="٢٠٢٤ · ٣٠ دقيقة">
+        <li class="audio-playlist__item" data-src="assets/audio/قداس ابينا المتنيح القمص بطرس الجزء الاول.MP3"
+          data-title="قداس ابينا المتنيح القمص بطرس الجزء الاول" data-meta="تسجيل صوتي">
           <span class="audio-playlist__num">02</span>
           <div class="audio-playlist__info">
-            <strong>رسالة عيد القيامة</strong>
-            <span>٢٠٢٤ · ٣٠ دقيقة</span>
+            <strong>قداس ابينا المتنيح القمص بطرس الجزء الاول</strong>
+            <span>تسجيل صوتي</span>
           </div>
           <span class="audio-playlist__icon" aria-hidden="true">♪</span>
         </li>
-        <li class="audio-playlist__item" data-src="assets/audio/sermon-03.mp3" data-title="كلمة في ذكرى الرسامة"
-          data-meta="٢٠٢٣ · ٢٠ دقيقة">
+        <li class="audio-playlist__item" data-src="assets/audio/قداس ابينا المتنيح القمص بطرس الجزء الثاني.MP3"
+          data-title="قداس ابينا المتنيح القمص بطرس الجزء الثاني" data-meta="تسجيل صوتي">
           <span class="audio-playlist__num">03</span>
           <div class="audio-playlist__info">
-            <strong>كلمة في ذكرى الرسامة</strong>
-            <span>٢٠٢٣ · ٢٠ دقيقة</span>
+            <strong>قداس ابينا المتنيح القمص بطرس الجزء الثاني</strong>
+            <span>تسجيل صوتي</span>
           </div>
           <span class="audio-playlist__icon" aria-hidden="true">♪</span>
         </li>
-        <li class="audio-playlist__item" data-src="assets/audio/sermon-04.mp3"
-          data-title="موعظة شباب — الطريق إلى النور" data-meta="٢٠٢٣ · ٣٥ دقيقة">
+        <li class="audio-playlist__item" data-src="assets/audio/قداس سيامة القس بطرس.mp3"
+          data-title="قداس سيامة القس بطرس" data-meta="تسجيل صوتي">
           <span class="audio-playlist__num">04</span>
           <div class="audio-playlist__info">
-            <strong>موعظة شباب — الطريق إلى النور</strong>
-            <span>٢٠٢٣ · ٣٥ دقيقة</span>
+            <strong>قداس سيامة القس بطرس</strong>
+            <span>تسجيل صوتي</span>
+          </div>
+          <span class="audio-playlist__icon" aria-hidden="true">♪</span>
+        </li>
+        <li class="audio-playlist__item" data-src="assets/audio/قطعة من قداس ابينا المتنيح القمص بطرس.mp3"
+          data-title="قطعة من قداس ابينا المتنيح القمص بطرس" data-meta="تسجيل صوتي">
+          <span class="audio-playlist__num">05</span>
+          <div class="audio-playlist__info">
+            <strong>قطعة من قداس ابينا المتنيح القمص بطرس</strong>
+            <span>تسجيل صوتي</span>
+          </div>
+          <span class="audio-playlist__icon" aria-hidden="true">♪</span>
+        </li>
+        <li class="audio-playlist__item" data-src="assets/audio/مديحة الصلبوت بصوت ابينا المتنيح القمص بطرس.mp3"
+          data-title="مديحة الصلبوت بصوت ابينا المتنيح القمص بطرس" data-meta="تسجيل صوتي">
+          <span class="audio-playlist__num">06</span>
+          <div class="audio-playlist__info">
+            <strong>مديحة الصلبوت بصوت ابينا المتنيح القمص بطرس</strong>
+            <span>تسجيل صوتي</span>
           </div>
           <span class="audio-playlist__icon" aria-hidden="true">♪</span>
         </li>
