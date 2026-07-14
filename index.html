@@ -1296,21 +1296,27 @@
     }
 
     .ach-mark {
+      display: inline-block;
       font-family: var(--serif-display);
       font-style: italic;
       color: var(--gold);
       font-size: 1.5rem;
       margin-bottom: 10px;
+      margin-inline-end: 8px;
+      vertical-align: top;
+      line-height: 1;
     }
 
     .ach-card h3 {
+      display: inline;
       margin: 0 0 8px;
       font-size: 1.02rem;
       color: var(--crimson-deep);
+      line-height: 1.4;
     }
 
     .ach-card p {
-      margin: 0;
+      margin: 10px 0 0;
       color: var(--walnut-soft);
       font-size: 0.9rem;
     }
@@ -3058,7 +3064,7 @@
             <h1>القمص بطرس القمص زكريا</h1>
           </div>
           <div class="subtitle">نيح الله نفسه في فردوس النعيم</div>
-          <div class="dates">تذكار النياحة &nbsp;•&nbsp; ٢٠٢٦ م</div>
+          <div class="dates">تذكار النياحة &nbsp;•&nbsp; ٢ يوليو ٢٠٢٦ م</div>
         </div>
 
         <div class="hero__bottom">
@@ -4208,9 +4214,9 @@
   <div class="lightbox" id="lightbox">
     <div class="lightbox__stage">
       <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">&times;</button>
-      <button class="lightbox-arrow prev" id="lightboxPrev" aria-label="الصورة السابقة">›</button>
+      <button class="lightbox-arrow prev" id="lightboxPrev" aria-label="الصورة السابقة">‹</button>
       <img id="lightboxImg" src="" alt="">
-      <button class="lightbox-arrow next" id="lightboxNext" aria-label="الصورة التالية">‹</button>
+      <button class="lightbox-arrow next" id="lightboxNext" aria-label="الصورة التالية">›</button>
       <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
   </div>
@@ -4259,8 +4265,8 @@
     <div class="media-carousel" data-index="0">
       <div class="media-viewport"><div class="media-track">${slidesHTML}</div></div>
       ${items.length > 1 ? `
-        <button class="media-arrow prev" data-dir="1" aria-label="السابق">›</button>
-        <button class="media-arrow next" data-dir="-1" aria-label="التالي">‹</button>
+        <button class="media-arrow prev" data-dir="1" aria-label="السابق">‹</button>
+        <button class="media-arrow next" data-dir="-1" aria-label="التالي">›</button>
 
         <div class="media-counter">1 / ${items.length}</div>
       ` : ''}
