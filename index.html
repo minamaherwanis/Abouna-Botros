@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -1394,6 +1394,7 @@
     .group {
       margin-bottom: 56px;
       scroll-margin-top: calc(var(--header-h) + 16px);
+      min-height: 380px;
     }
 
     .group:last-child {
@@ -4296,7 +4297,10 @@
       .developer-credit__names {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 5px;
+        flex-wrap: nowrap;
+        direction: ltr; /* Force left-to-right flow for the English names & symbol */
       }
 
       .developer-credit__text {
@@ -4304,17 +4308,12 @@
         color: rgba(255, 255, 255, 0.35);
       }
 
-      .developer-credit__names {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-
       .developer-credit__name {
         font-size: 0.65rem;
         text-decoration: none;
         transition: color 0.3s;
         font-weight: 600;
+        line-height: 1;
       }
 
       .dev-mina {
@@ -4336,6 +4335,10 @@
       .developer-credit__sep {
         font-size: 0.6rem;
         color: rgba(255, 255, 255, 0.25);
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        transform: translateY(-1px); /* Micro-adjustment to center the ampersand symbol vertically */
       }
     </style>
   </footer>
@@ -4410,8 +4413,6 @@
       groupEl.insertAdjacentHTML('beforeend', carouselHTML);
     }
 
-    document.querySelectorAll('.group[data-title]').forEach(buildMediaCarousel);
-
     /* ---- Media (coverflow) carousel controller ---- */
     function updateMediaCarousel(root, index) {
       const track = root.querySelector('.media-track');
@@ -4439,8 +4440,6 @@
       const dotsWrap = root.querySelector('.media-dots');
       if (dotsWrap) { [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index)); }
     }
-
-    document.querySelectorAll('.media-carousel').forEach(root => updateMediaCarousel(root, 0));
 
     document.addEventListener('click', (e) => {
       const arrow = e.target.closest('.media-arrow');
@@ -4479,10 +4478,6 @@
         isDown = false;
       }, { passive: true });
     }
-    document.querySelectorAll('.media-carousel').forEach(root => {
-      const current = () => parseInt(root.dataset.index || '0', 10);
-      addSwipe(root, () => updateMediaCarousel(root, current() - 1), () => updateMediaCarousel(root, current() + 1));
-    });
     document.querySelectorAll('.test-carousel').forEach(root => {
       const current = () => parseInt(root.dataset.index || '0', 10);
       addSwipe(root, () => setTestIndex(root, current() - 1), () => setTestIndex(root, current() + 1));
@@ -4514,8 +4509,10 @@
     const lightboxCounter = document.getElementById('lightboxCounter');
     let lbImages = [];
     let lbIndex = 0;
+    let currentCarousel = null;
 
     function openLightboxFor(carouselRoot) {
+      currentCarousel = carouselRoot;
       const slides = [...carouselRoot.querySelectorAll('.media-slide[data-type="image"]')];
       lbImages = slides.map(s => s.dataset.src);
       const activeSlide = carouselRoot.querySelector('.media-slide.is-active');
@@ -4523,6 +4520,15 @@
       lbIndex = activeIdx >= 0 ? activeIdx : 0;
       showLightboxImage();
       lightbox.classList.add('active');
+
+      // Stop autoplay on all carousels when lightbox opens
+      document.querySelectorAll('.media-carousel').forEach(c => {
+        if (c._stopAutoplay) c._stopAutoplay();
+      });
+      const testRoot = document.getElementById('testCarousel');
+      if (testRoot && testRoot._stopAutoplay) {
+        testRoot._stopAutoplay();
+      }
     }
 
     function showLightboxImage() {
@@ -4531,17 +4537,38 @@
       lightboxCounter.textContent = lbImages.length > 1 ? `${lbIndex + 1} / ${lbImages.length}` : '';
       document.getElementById('lightboxPrev').style.display = lbImages.length > 1 ? 'flex' : 'none';
       document.getElementById('lightboxNext').style.display = lbImages.length > 1 ? 'flex' : 'none';
+
+      // Sync background carousel with the current lightbox image index
+      if (currentCarousel) {
+        const slides = [...currentCarousel.querySelectorAll('.media-slide[data-type="image"]')];
+        if (slides[lbIndex]) {
+          const targetIdx = parseInt(slides[lbIndex].dataset.idx, 10);
+          updateMediaCarousel(currentCarousel, targetIdx);
+        }
+      }
     }
     function lbGoNext() { if (!lbImages.length) return; lbIndex = (lbIndex + 1) % lbImages.length; showLightboxImage(); }
     function lbGoPrev() { if (!lbImages.length) return; lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; showLightboxImage(); }
 
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      // Resume autoplay on visible carousels when lightbox closes
+      document.querySelectorAll('.media-carousel').forEach(c => {
+        if (c._isIntersecting && c._startAutoplay) c._startAutoplay();
+      });
+      const testRoot = document.getElementById('testCarousel');
+      if (testRoot && testRoot._isIntersecting && testRoot._startAutoplay) {
+        testRoot._startAutoplay();
+      }
+    }
+
     document.getElementById('lightboxNext').addEventListener('click', lbGoNext);
     document.getElementById('lightboxPrev').addEventListener('click', lbGoPrev);
-    document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('active'));
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox || e.target.classList.contains('lightbox__stage')) lightbox.classList.remove('active'); });
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox || e.target.classList.contains('lightbox__stage')) closeLightbox(); });
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') lightbox.classList.remove('active');
+      if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') lbGoNext();  /* RTL: left visually = next */
       if (e.key === 'ArrowRight') lbGoPrev();
     });
@@ -4561,11 +4588,15 @@
         });
       }, { threshold: 0.85 });
 
-      document.querySelectorAll('.media-carousel').forEach(root => {
+      window._initAutoplayForCarousel = (root) => {
         const n = root.querySelectorAll('.media-slide').length;
         if (n <= 1) return;
         let timer = null;
-        const start = () => { stop(); timer = setInterval(() => updateMediaCarousel(root, parseInt(root.dataset.index || '0', 10) + 1), 4200); };
+        const start = () => {
+          stop();
+          if (lightbox.classList.contains('active')) return; // Do not autoplay if lightbox is open
+          timer = setInterval(() => updateMediaCarousel(root, parseInt(root.dataset.index || '0', 10) + 1), 4200);
+        };
         const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
 
         root._startAutoplay = start;
@@ -4578,12 +4609,16 @@
         root.addEventListener('mouseleave', () => { if (root._isIntersecting) start(); });
         root.addEventListener('touchstart', stop, { passive: true });
         root.addEventListener('touchend', () => { if (root._isIntersecting) setTimeout(start, 3500); }, { passive: true });
-      });
+      };
 
       const testRoot = document.getElementById('testCarousel');
       if (testRoot && testRoot.querySelectorAll('.test-slide').length > 1) {
         let timer = null;
-        const start = () => { stop(); timer = setInterval(() => setTestIndex(testRoot, parseInt(testRoot.dataset.index || '0', 10) + 1), 6000); };
+        const start = () => {
+          stop();
+          if (lightbox.classList.contains('active')) return; // Do not autoplay if lightbox is open
+          timer = setInterval(() => setTestIndex(testRoot, parseInt(testRoot.dataset.index || '0', 10) + 1), 6000);
+        };
         const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
 
         testRoot._startAutoplay = start;
@@ -4599,6 +4634,30 @@
       }
     }
     initAutoplay();
+
+    // Defer building carousels until they are close to the viewport (Lazy loading)
+    const carouselObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const groupEl = entry.target;
+          buildMediaCarousel(groupEl);
+          const root = groupEl.querySelector('.media-carousel');
+          if (root) {
+            updateMediaCarousel(root, 0);
+            const current = () => parseInt(root.dataset.index || '0', 10);
+            addSwipe(root, () => updateMediaCarousel(root, current() - 1), () => updateMediaCarousel(root, current() + 1));
+            if (window._initAutoplayForCarousel) {
+              window._initAutoplayForCarousel(root);
+            }
+          }
+          observer.unobserve(groupEl);
+        }
+      });
+    }, { rootMargin: '350px 0px', threshold: 0.01 });
+
+    document.querySelectorAll('.group[data-title]').forEach(groupEl => {
+      carouselObserver.observe(groupEl);
+    });
 
     window.addEventListener('resize', () => {
       document.querySelectorAll('.media-carousel').forEach(root => updateMediaCarousel(root, parseInt(root.dataset.index || '0', 10)));
