@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
+  <!-- Preload preloader logo so it's ready before animations start -->
+  <link rel="preload" href="assets/images/church-logo.webp" as="image" type="image/webp">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
   <meta name="theme-color" content="#1a1410">
   <title>القمص بطرس القمص زكريا | في ذكرى نياحته</title>
@@ -81,12 +83,11 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: var(--walnut);
+      background: #120e0a;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
       transition: opacity .6s ease, visibility .6s ease;
     }
 
@@ -96,35 +97,92 @@
       pointer-events: none;
     }
 
-    .preloader__cross {
-      font-size: 2.4rem;
-      color: var(--gold);
-      animation: pulseCross 1.4s ease-in-out infinite;
+    .preloader__logo-container {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      box-shadow: 0 0 30px rgba(169, 131, 47, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+      animation: logoPulse 2.2s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .preloader__cross::before {
-      content: "✝";
+    .preloader__logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #120e0a;
+      z-index: 2;
     }
 
-    @keyframes pulseCross {
+    .preloader__glow {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 90, 0.4) 0%, transparent 70%);
+      z-index: 1;
+      animation: rotateGlow 6s linear infinite;
+      pointer-events: none;
+    }
+
+    .preloader__logo-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.35),
+          transparent);
+      transform: skewX(-25deg);
+      animation: shine 2.2s infinite;
+      z-index: 3;
+    }
+
+    @keyframes logoPulse {
 
       0%,
       100% {
-        transform: scale(1);
-        opacity: 0.6;
+        transform: scale(0.96);
+        box-shadow: 0 0 25px rgba(169, 131, 47, 0.3);
       }
 
       50% {
-        transform: scale(1.15);
-        opacity: 1;
+        transform: scale(1.04);
+        box-shadow: 0 0 45px rgba(212, 175, 90, 0.6);
       }
     }
 
-    .preloader__text {
-      color: var(--ivory-deep);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      opacity: 0.7;
+    @keyframes rotateGlow {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        left: -150%;
+      }
+
+      50% {
+        left: 150%;
+      }
+
+      100% {
+        left: 150%;
+      }
     }
 
     /* ===== Ambient background ===== */
@@ -2992,8 +3050,10 @@
 <body>
 
   <div id="preloader" aria-hidden="true">
-    <div class="preloader__cross"></div>
-    <p class="preloader__text">جاري التحميل...</p>
+    <div class="preloader__logo-container">
+      <img src="assets/images/church-logo.webp" alt="شعار الكنيسة" class="preloader__logo">
+      <div class="preloader__glow"></div>
+    </div>
   </div>
 
   <div class="bg-ambient" id="bgAmbient" aria-hidden="true"></div>
@@ -3045,7 +3105,7 @@
     <section class="hero" id="hero">
       <!-- Background photo -->
       <div class="hero__bg" aria-hidden="true">
-        <img class="hero__bg-img" src="assets/images/hero-bg.jpg" alt="" fetchpriority="high" decoding="async">
+        <img class="hero__bg-img" src="assets/images/hero-bg.webp" alt="" fetchpriority="high" decoding="async">
       </div>
       <div class="hero__rays" aria-hidden="true"></div>
       <div class="hero__parallax-layer" id="heroParallax" aria-hidden="true"></div>
@@ -3231,35 +3291,35 @@
       <div id="archiveGroups">
 
         <div class="group" id="archive-g0" data-title="صور من سنوات الخدمة الأولى">
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/1.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/40.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/21.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/3.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/4.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/6.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/7.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/8.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/9.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/10.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/11.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/12.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/13.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/14.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/15.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/16.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/17.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/18.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/19.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/20.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/5.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/22.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/23.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/24.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/25.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/26.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/27.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/28.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/41.jpg"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/1.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/40.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/21.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/3.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/4.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/6.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/7.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/8.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/9.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/10.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/11.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/12.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/13.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/14.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/15.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/16.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/17.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/18.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/19.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/20.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/5.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/22.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/23.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/24.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/25.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/26.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/27.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/28.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صور من سنوات الخدمة الأولى/41.webp"></div>
         </div>
 
 
@@ -3286,303 +3346,303 @@
       <div id="funeralGroups">
         <div class="group" id="monasabat-bishop2" data-title="زيارة نيافة الحبر الجليل الأنبا بضابا">
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة نيافة الحبر الجليل الأنبا بضابا/5954118265325948791.jpg"></div>
+            data-src="assets/images/زيارة نيافة الحبر الجليل الأنبا بضابا/5954118265325948791.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة نيافة الحبر الجليل الأنبا بضابا/5954118265325948792.jpg"></div>
+            data-src="assets/images/زيارة نيافة الحبر الجليل الأنبا بضابا/5954118265325948792.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة نيافة الحبر الجليل الأنبا بضابا/5954118265325948793.jpg"></div>
+            data-src="assets/images/زيارة نيافة الحبر الجليل الأنبا بضابا/5954118265325948793.webp"></div>
         </div>
 
 
         <div class="group" id="janaza-g2" data-title="صلاة العشية والتسبحة ونظرة الوداع">
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/55.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/55.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/2.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/2.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/3.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/3.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/4.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/4.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/6.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/6.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948756.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948756.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948757.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948757.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948758.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948758.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948759.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948759.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948760.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948760.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948761.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948761.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948762.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948762.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948763.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948763.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948764.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948764.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948765.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948765.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948766.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948766.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948767.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948767.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948768.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948768.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948769.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948769.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948770.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948770.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948771.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948771.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948772.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948772.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948773.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948773.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948774.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948774.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948775.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948775.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948776.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948776.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948777.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948777.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948778.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948778.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948779.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948779.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948780.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948780.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948781.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948781.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948782.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948782.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948783.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948783.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948784.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948784.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948785.jpg"></div>
+            data-src="assets/images/صلاة العشية والتسبحة ونظرة الوداع بحضور/5954118265325948785.webp"></div>
         </div>
         <div class="group" id="janaza-g4" data-title="صور القداس و صلاة الجنازة ">
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948644.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948644.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948645.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948645.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948646.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948646.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948647.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948647.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948648.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948648.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948649.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948649.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948650.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948650.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948651.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948651.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948652.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948652.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948653.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948653.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948654.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948654.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948655.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948655.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948656.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948656.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948657.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948657.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948658.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948658.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948659.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948659.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948660.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948660.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948661.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948661.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948662.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948662.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948663.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948663.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948664.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948664.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948665.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948665.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948666.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948666.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948667.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948667.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948668.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948668.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948669.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948669.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948670.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948670.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948671.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948671.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948672.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948672.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948673.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948673.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948674.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948674.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948675.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948675.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948676.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948676.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948677.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948677.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948678.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948678.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948679.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948679.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948680.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948680.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948681.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948681.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948682.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948682.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948683.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948683.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948684.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948684.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948685.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948685.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948686.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948686.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948687.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948687.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948688.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948688.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948689.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948689.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948690.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948690.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948691.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948691.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948692.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948692.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948693.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948693.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948694.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948694.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948695.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948695.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948696.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948696.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948697.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948697.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948698.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948698.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948699.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948699.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948700.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948700.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948701.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948701.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948702.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948702.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948703.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948703.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948704.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948704.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948705.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948705.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948706.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948706.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948707.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948707.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948708.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948708.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948709.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948709.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948710.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948710.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948711.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948711.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948712.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948712.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948713.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948713.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948714.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948714.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948715.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948715.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948716.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948716.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948717.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948717.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948718.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948718.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948719.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948719.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948720.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948720.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948721.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948721.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948722.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948722.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948723.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948723.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948724.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948724.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948725.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948725.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948726.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948726.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948727.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948727.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948728.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948728.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948729.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948729.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948730.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948730.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948731.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948731.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948732.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948732.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948733.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948733.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948734.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948734.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948735.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948735.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948736.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948736.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948737.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948737.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948738.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948738.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948739.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948739.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948740.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948740.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948741.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948741.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948742.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948742.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948743.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948743.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948744.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948744.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948745.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948745.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948746.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948746.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948747.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948747.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948786.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948786.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948787.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948787.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948788.jpg"></div>
+            data-src="assets/images/صور القداس و صلاة الجنازة/5954118265325948788.webp"></div>
         </div>
 
         <div class="videos-section"
@@ -3616,52 +3676,52 @@
 
 
         <div class="group" id="janaza-g1" data-title="صلاة الثالث">
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948596.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948597.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948598.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948599.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948600.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948601.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948602.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948603.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948604.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948605.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948606.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948607.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948608.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948609.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948610.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948611.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948612.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948613.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948614.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948615.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948616.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948617.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948618.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948619.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948620.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948621.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948622.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948623.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948624.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948625.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948626.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948627.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948628.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948629.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948630.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948631.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948632.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948633.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948634.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948635.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948636.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948637.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948638.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948639.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948640.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948641.jpg"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948596.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948597.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948598.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948599.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948600.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948601.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948602.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948603.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948604.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948605.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948606.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948607.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948608.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948609.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948610.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948611.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948612.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948613.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948614.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948615.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948616.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948617.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948618.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948619.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948620.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948621.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948622.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948623.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948624.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948625.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948626.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948627.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948628.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948629.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948630.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948631.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948632.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948633.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948634.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948635.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948636.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948637.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948638.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948639.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948640.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/صلاة الثالث/5954118265325948641.webp"></div>
         </div>
 
 
@@ -3680,171 +3740,171 @@
         <div class="group" id="monasabat-g0"
           data-title="تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه">
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_1_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_1_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_2_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_2_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_3_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_3_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_4_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_4_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_5_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_5_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_6_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_6_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_7_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_7_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_8_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_8_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_9_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_9_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_10_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_10_2026-07-14_09-21-08.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_11_2026-07-14_09-21-08.jpg">
+            data-src="assets/images/تدشين كنيسة الشهيد العظيم فيلوباتير مرقوريوس ابى سيفين بنجع خيربه/photo_11_2026-07-14_09-21-08.webp">
           </div>
         </div>
 
         <div class="group" id="monasabat-g1"
           data-title="احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا">
           <div class="media-item" data-type="image"
-            data-src="assets/images/احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا/photo_1_2026-07-14_09-22-20.jpg">
+            data-src="assets/images/احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا/photo_1_2026-07-14_09-22-20.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا/photo_2_2026-07-14_09-22-20.jpg">
+            data-src="assets/images/احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا/photo_2_2026-07-14_09-22-20.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا/photo_3_2026-07-14_09-22-20.jpg">
+            data-src="assets/images/احتفال صاحب النيافة الانبا بضابا ومجمع الاباء الكهنة بمناسبة اليوبيل الذهبي لكهنوت ابونا القمص بطرس القمص زكريا/photo_3_2026-07-14_09-22-20.webp">
           </div>
         </div>
 
         <div class="group" id="janaza-g0"
           data-title="زيارة نيافة الحبر الجليل الأنبا بيضابا وافتتاح مبنى الخدمات - مارس ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/2.jpg"></div>
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/2.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948890.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948890.webp">
           </div>
 
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948874.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948874.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948875.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948875.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948876.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948876.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948877.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948877.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948878.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948878.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948879.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948879.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948880.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948880.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948881.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948881.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948882.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948882.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948883.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948883.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948884.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948884.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948885.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948885.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948886.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948886.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948887.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948887.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948889.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948889.webp">
           </div>
 
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948891.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948891.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948892.jpg">
+            data-src="assets/images/زيارة صاحب النيافة الانبا بضابا وافتتاح مبنى الخدمات  مارس ٢٠٢٦ م/5954118265325948892.webp">
           </div>
         </div>
 
         <div class="group" id="monasabat-shaaneen" data-title="قداس احد الشعانين ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948856.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948856.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948858.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948858.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948859.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948859.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948860.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948860.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948861.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948861.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948862.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948862.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948863.jpg"></div>
+            data-src="assets/images/قداس احد الشعانين ٢٠٢٦ م/5954118265325948863.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g1" data-title="قنديل وقداس جمعة ختام الصوم ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948867.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948867.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948868.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948868.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948869.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948869.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948870.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948870.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948871.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948871.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948872.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948872.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948873.jpg"></div>
+            data-src="assets/images/قنديل وقداس جمعة ختام الصوم ٢٠٢٦م/5954118265325948873.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g2"
           data-title="مشاركة أبينا المتنيح في القداس الإلهي - كنيسة السيدة العذراء مريم بالزيتون">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948794.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948794.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948795.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948795.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948796.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948796.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948797.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948797.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948798.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948798.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948803.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948803.webp">
           </div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948804.jpg">
+            data-src="assets/images/مشاركة ابينا المتنيح فى القداس الالهى كنيسة السيده العذراء مريم بالزيتون/5954118265325948804.webp">
           </div>
         </div>
 
@@ -3867,263 +3927,263 @@
 
         <div class="group" id="monasabat-g3" data-title="مقتطفات من عيد القيامة المجيد ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948806.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948806.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948807.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948807.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948808.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948808.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948809.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948809.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948810.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948810.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948811.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948811.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948812.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948812.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948813.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948813.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948814.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948814.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948815.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948815.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948816.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948816.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948817.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948817.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948818.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948818.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948819.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948819.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948820.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948820.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948821.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948821.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948822.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948822.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948823.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948823.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948824.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948824.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948825.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد القيامة المجيد ٢٠٢٦ م/5954118265325948825.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g4" data-title="مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948919.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948919.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948920.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948920.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948921.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948921.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948922.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948922.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948923.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948923.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948924.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948924.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948925.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948925.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948926.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948926.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948927.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948927.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948928.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948928.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948929.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948929.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948930.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948930.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948931.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948931.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948932.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948932.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948933.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948933.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948934.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948934.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948935.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948935.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948936.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948936.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948937.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/5954118265325948937.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/0122.jpg"></div>
+            data-src="assets/images/مقتطفات من عيد الميلاد المجيد ٢٠٢٦ م/0122.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g5" data-title="مقتطفات من قداس صوم أهل نينوى ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948894.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948894.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948895.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948895.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948896.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948896.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948897.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948897.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948898.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948898.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948899.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948899.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948900.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948900.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948901.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948901.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948902.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948902.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948903.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948903.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948904.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948904.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948905.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948905.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948906.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948906.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948907.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948907.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948908.jpg"></div>
+            data-src="assets/images/مقتطفات من قداس صوم أهل نينوى ٢٠٢٦/5954118265325948908.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g6" data-title="مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948841.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948841.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948909.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948909.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948910.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948910.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948911.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948911.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948912.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948912.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948913.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948913.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948914.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948914.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948915.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948915.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948916.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948916.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948917.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقداس عيد الغطاس ٢٠٢٦/5954118265325948917.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g7" data-title="مقتطفات من لقان وقداس خميس العهد لعام ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948840.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948840.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948842.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948842.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948843.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948843.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948844.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948844.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948845.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948845.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948846.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948846.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948847.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948847.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948848.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948848.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948849.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948849.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948850.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948850.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948851.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948851.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948852.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948852.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948853.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948853.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948854.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948854.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948855.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948855.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948856.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948856.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948857.jpg"></div>
+            data-src="assets/images/مقتطفات من لقان وقدام خميس العهد لعام ٢٠٢٦ م/5954118265325948857.webp"></div>
         </div>
 
         <div class="group" id="monasabat-g8" data-title="مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948828.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948828.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948829.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948829.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948830.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948830.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948831.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948831.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948832.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948832.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948833.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948833.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948834.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948834.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948835.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948835.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948836.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948836.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948837.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948837.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948838.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948838.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948839.jpg"></div>
+            data-src="assets/images/مقتطفات من يوم الجمعة العظيمة عام ٢٠٢٦ م/5954118265325948839.webp"></div>
         </div>
 
         <div class="group" id="monasabat-misc" data-title="مقتطفات متنوعة">
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_1_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_1_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_2_2026-07-14_09-23-28.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/مقتطفات متنوعة/0122.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_2_2026-07-14_09-23-28.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/مقتطفات متنوعة/0122.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_3_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_3_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_4_2026-07-14_09-23-28.jpg"></div>
-          <div class="media-item" data-type="image" data-src="assets/images/مقتطفات متنوعة/0122450.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_4_2026-07-14_09-23-28.webp"></div>
+          <div class="media-item" data-type="image" data-src="assets/images/مقتطفات متنوعة/0122450.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_5_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_5_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_6_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_6_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_7_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_7_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_8_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_8_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_9_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_9_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_10_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_10_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_11_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_11_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_12_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_12_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_13_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_13_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_14_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_14_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_15_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_15_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_16_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_16_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_17_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_17_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_18_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_18_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_19_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_19_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_20_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_20_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_21_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_21_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_22_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_22_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_23_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_23_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_24_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_24_2026-07-14_09-23-28.webp"></div>
           <div class="media-item" data-type="image"
-            data-src="assets/images/مقتطفات متنوعة/photo_25_2026-07-14_09-23-28.jpg"></div>
+            data-src="assets/images/مقتطفات متنوعة/photo_25_2026-07-14_09-23-28.webp"></div>
         </div>
 
 
@@ -4142,7 +4202,7 @@
       <div class="audio-player" id="main-audio-player">
         <div class="audio-player__art">
           <div class="audio-player__art-glow"></div>
-          <img src="assets/images/audio-cover.jpg" alt="غلاف التسجيل" loading="lazy" width="200" height="200">
+          <img src="assets/images/audio-cover.webp" alt="غلاف التسجيل" loading="lazy" width="200" height="200">
         </div>
         <div class="audio-player__body">
           <div class="audio-player__title-row">
@@ -4273,47 +4333,45 @@
     <p>موقع تذكاري لراحة نفس القمص بطرس القمص زكريا</p>
     <p style="opacity:0.6; font-size:0.78rem; margin-bottom: 20px;">جميع الحقوق محفوظة © 2026</p>
 
-    <div class="developer-credit" style="margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: var(--sans);">
-      <span class="developer-credit__text" style="font-size: 0.6rem; color: rgba(255, 255, 255, 0.35);">تم تصميم وتطوير الموقع بمحبة بواسطة</span>
-      <div class="developer-credit__names" style="display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: nowrap; direction: ltr;">
-        <a href="https://minamaherwanis.github.io/Portfolio/" target="_blank" rel="noopener noreferrer"
-          class="developer-credit__name dev-mina" style="font-size: 0.65rem; text-decoration: none; font-weight: 600; line-height: 1; color: #d4af37;">Mina</a>
-        <span class="developer-credit__sep" style="font-size: 0.6rem; color: rgba(255, 255, 255, 0.25); line-height: 1; display: inline-flex; align-items: center; transform: translateY(-1px); margin: 0 2px;">&amp;</span>
-        <a href="https://abanobnabeh.github.io/portfolio/" target="_blank" rel="noopener noreferrer"
-          class="developer-credit__name dev-abanob" style="font-size: 0.65rem; text-decoration: none; font-weight: 600; line-height: 1; color: #d4af37;">Abanob</a>
-      </div>
+    <div class="developer-credit">
+      <span class="developer-credit__text">تم تصميم وتطوير الموقع بمحبة بواسطة</span>
+      <p class="developer-credit__names"><a href="https://minamaherwanis.github.io/Portfolio/" target="_blank"
+          rel="noopener noreferrer" class="developer-credit__name dev-mina">Mina Maher</a><span
+          class="developer-credit__sep">&amp;</span><a href="https://abanobnabeh.github.io/portfolio/" target="_blank"
+          rel="noopener noreferrer" class="developer-credit__name dev-abanob">Abanob Nabeh</a></p>
     </div>
 
     <style>
       .developer-credit {
-        margin-top: 10px;
+        margin-top: 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 3px;
+        gap: 6px;
         font-family: var(--sans);
       }
 
       .developer-credit__names {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        flex-wrap: nowrap;
-        direction: ltr; /* Force left-to-right flow for the English names & symbol */
+        display: block;
+        white-space: nowrap;
+        text-align: center;
+        direction: ltr;
+        line-height: 1.4;
       }
 
       .developer-credit__text {
-        font-size: 0.6rem;
-        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.4);
+        display: block;
+        text-align: center;
       }
 
       .developer-credit__name {
-        font-size: 0.65rem;
+        font-size: 0.55rem;
         text-decoration: none;
         transition: color 0.3s;
         font-weight: 600;
-        line-height: 1;
+        display: inline;
       }
 
       .dev-mina {
@@ -4333,12 +4391,10 @@
       }
 
       .developer-credit__sep {
-        font-size: 0.6rem;
-        color: rgba(255, 255, 255, 0.25);
-        line-height: 1;
-        display: inline-flex;
-        align-items: center;
-        transform: translateY(-1px); /* Micro-adjustment to center the ampersand symbol vertically */
+        font-size: 0.45rem;
+        color: rgba(255, 255, 255, 0.35);
+        display: inline;
+        margin: 0 5px;
       }
     </style>
   </footer>
@@ -4576,6 +4632,8 @@
 
     /* ---- Autoplay: media carousels + testimonials ---- */
     function initAutoplay() {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 760;
+
       const autoplayObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const el = entry.target;
@@ -4594,6 +4652,7 @@
         let timer = null;
         const start = () => {
           stop();
+          if (isMobileDevice) return; // Disable autoplay on mobile (iPhone, Android, etc.)
           if (lightbox.classList.contains('active')) return; // Do not autoplay if lightbox is open
           timer = setInterval(() => updateMediaCarousel(root, parseInt(root.dataset.index || '0', 10) + 1), 4200);
         };
@@ -4616,6 +4675,7 @@
         let timer = null;
         const start = () => {
           stop();
+          if (isMobileDevice) return; // Disable autoplay on mobile (iPhone, Android, etc.)
           if (lightbox.classList.contains('active')) return; // Do not autoplay if lightbox is open
           timer = setInterval(() => setTestIndex(testRoot, parseInt(testRoot.dataset.index || '0', 10) + 1), 6000);
         };
